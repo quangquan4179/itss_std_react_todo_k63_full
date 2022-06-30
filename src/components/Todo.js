@@ -33,17 +33,17 @@ function Todo() {
   };
   
   const handleAdd = text => {
-    putItems([...items, { key: getKey(), text, done: false }]);
+    putItems( { key: getKey(), text, done: false });
   };
   
   const handleFilterChange = value => setFilter(value);
 
   return (
-    <article class="panel is-danger">
+    <article className="panel is-danger">
       <div className="panel-heading">
-        <span class="icon-text">
-          <span class="icon">
-            <i class="fas fa-calendar-check"></i>
+        <span className="icon-text">
+          <span className="icon">
+            <i className="fas fa-calendar-check"></i>
           </span>
           <span> ITSS Todoアプリ</span>
         </span>

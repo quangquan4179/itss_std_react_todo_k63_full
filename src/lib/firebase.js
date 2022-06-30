@@ -24,6 +24,8 @@ export const getFirebaseItems = async () => {
     const snapshot = await db
         .collection("todos")
         .get();
+
+      console.log(snapshot.docs)
     const items = snapshot.docs.map(
         (doc) => ({ ...doc.data(), id: doc.id })
     );
@@ -35,6 +37,8 @@ export const getFirebaseItems = async () => {
 }
 
 export const addFirebaseItem = async (item) => {
+
+
   try {
     const todoRef = db.collection("todos");
     await todoRef.add(item);

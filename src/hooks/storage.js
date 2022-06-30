@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react';
+import { getFirebaseItems,addFirebaseItem } from '../lib/firebase';
 
 const STORAGE_KEY = 'itss-todo';
-
 function useStorage() {
   const [items, setItems] = useState([]);
-  
+  const  getIt = async()=>{
+     
+     const it = await getFirebaseItems()
+     setItems(it);
+   }
   useEffect(() => {
     const data = localStorage.getItem(STORAGE_KEY);
+     getIt()
     
     if (!data) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
@@ -15,13 +20,12 @@ function useStorage() {
     }
   }, []);
 
-  const putItems = items => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-    setItems  (items);
+  const putItems = async(item) => {
+     await addFirebaseItem(item)
+    setItems  ([...items,item]);
   };
 
   const clearItems = () => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([]));
     setItems([]);
     
   };
